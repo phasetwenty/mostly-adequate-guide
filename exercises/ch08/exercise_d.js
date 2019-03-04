@@ -13,7 +13,12 @@
 // Remember either's two arguments must return the same type.
 
 // validateName :: User -> Either String ()
-const validateName = undefined;
+const validateName = curry(user => user.name.length > 3 ? Right.of(user) : left('problem'));
+// this left v right API is bullshit
 
 // register :: User -> IO String
-const register = compose(undefined, validateUser(validateName));
+const register = compose(map(showWelcome), map(save), validateUser(validateName));
+
+const result = register(albert);
+console.log(result);
+console.log(``);
